@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech Converter</title>
+</head>
+<body>
+    <h1>Text-to-Speech Converter</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt" required>
+        <button type="submit">Convert and Download</button>
+    </form>
+    {% if mp3_file %}
+        <h2>Result:</h2>
+        <audio controls>
+            <source src="{{ mp3_file }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <a href="/download?mp3_file={{ mp3_file }}" download>Download MP3</a>
+    {% endif %}
+</body>
+</html>

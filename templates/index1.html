@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech Converter</title>
+    <style>
+        body {
+            background-color: #004b49;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: white; 
+			font-family: 'Your Preferred Heading Font', sans-serif;
+        }
+
+        form {
+            margin-top: 40px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"], textarea {
+            margin-bottom: 10px; 
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        
+        #logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 150px; 
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <img id="logo" src="https://cfo.co.za/wp-content/uploads/2021/05/iOCO_Logo_Mid-Morning-1024x470.jpg" alt="Logo"> 
+    <h1>Text-to-Speech Converter</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt">
+        <button type="submit">Convert and Download</button>
+    </form>
+    <form action="/text-to-speech" method="post">
+        <textarea name="text_content" rows="4" cols="50" placeholder="Enter text..."></textarea>
+        <button type="submit">Convert to Speech</button>
+    </form>
+    {% if mp3_file %}
+        <h2>Result:</h2>
+        <audio controls>
+            <source src="{{ mp3_file }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <a href="/download?mp3_file={{ mp3_file }}" download>Download MP3</a>
+    {% endif %}
+</body>
+</html>
+
+
